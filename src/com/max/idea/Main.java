@@ -10,13 +10,26 @@ public class Main {
         int x = scanner.nextInt();
         System.out.print("Введите число y: ");
         int y = scanner.nextInt();
-        System.out.print("Введите число z: ");
-        int z = scanner.nextInt();
+        System.out.print("Введите символ (+ - * /): ");
+        String symbol = scanner.next();
 
-        int avg = (x + y + z) / 3;
-        System.out.println("Среднее арифметическое чисел x, y, z = " + avg);
-
-        if (avg / 2 > 3)
-            System.out.println("Программа выполнена корректно");
+        int z = 0;
+        switch (symbol) {
+            case "+":
+              z = x + y;
+              break;
+            case "-":
+                z = x - y;
+                break;
+            case "*":
+                z = x * y;
+                break;
+            case "/":
+                z = x / y;
+                break;
+            default:
+                System.out.println("Вы ввели недопустимый символ!");
+        }
+        System.out.printf("Результ выполнения операции %d %s %d = %d ", x, symbol, y, z);
     }
 }
