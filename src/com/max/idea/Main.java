@@ -6,25 +6,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        final int X = 0, Y = 1, Z = 2;
 
-        System.out.print("Введите размер массива: ");
-        int l = scanner.nextInt();
-        int[] arr = new int[l];
+        System.out.print("Введите целое положительное число: ");
+        int x = scanner.nextInt();
 
-        for (int i = 0; i < l; i++) {
-            System.out.print("Введите элемент массива: ");
-            arr[i] = scanner.nextInt();
+        int s = 0;
+        for (int i = 1; i <= x; i++) {
+            if (i % 2 != 0) s += i;
         }
 
-        for (int i = 0; i < l; i++) {
-            switch (arr[i]) {
-                case X:
-                case Y:
-                case Z:
-                    System.out.println("Данное значение имеется в константах");
-                    break;
-            }
-        }
+        System.out.printf("Сумма нечетных чисел равна: %d%n", s);
     }
 }
