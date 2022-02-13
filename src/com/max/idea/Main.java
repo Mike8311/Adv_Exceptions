@@ -1,30 +1,40 @@
 package com.max.idea;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner( System.in );
 
-        System.out.print( "Ввод: ");
-        String u = scanner.nextLine();
+        System.out.print( "Количество строк: ");
+        int l = scanner.nextInt();
 
-        int x = u.indexOf( 'x' );
-        int o = u.charAt( 1 ) == '+' ? 1 : -1;
-        int a = Character.getNumericValue( u.charAt( 0 ) );
-        int b = Character.getNumericValue( u.charAt( 2 ) );
-        int c = Character.getNumericValue( u.charAt( 4 ) );
-
-        switch (x) {
-            case 0:
-                System.out.println( "Вывод: " + (c - b * o) );
-                break;
-            case 2:
-                System.out.println( "Вывод: " + (c - a) * o );
-                break;
-            case 4:
-                System.out.println( "Вывод: " + (a + b * o) );
-                break;
+        String[] arr = new String[l];
+        for (int i = 0; i < l; i++) {
+            System.out.printf( "Строка %d: ", i + 1);
+            arr[i] = scanner.next();
         }
+
+        int max = 0;
+        int maxI = -1;
+        for (int i = 0; i < l; i++) {
+            String distinct = arr[i];
+            for (int j = 0; j < distinct.length(); j++) {
+                distinct = distinct.substring(0, j + 1) +
+                    distinct.substring( j + 1 ).replaceAll( distinct.substring( j, j + 1 ), "" );
+            }
+
+            if (distinct.length() > max) {
+                max = distinct.length();
+                maxI = i;
+            }
+            else if (max == distinct.length()) {
+                if (maxI == -1)
+                    maxI = i;
+            }
+        }
+
+        System.out.println("Ответ: " + arr[maxI]);
     }
 }
