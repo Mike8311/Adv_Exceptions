@@ -1,40 +1,39 @@
 package com.max.idea;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner( System.in );
+        String question = "Сидит дед, во сто шуб одет, кто его раздевает, тот слезы проливает";
+        String answer = "Заархивированный вирус";
 
-        System.out.print( "Количество строк: ");
-        int l = scanner.nextInt();
+        System.out.println( "Отгдай загадку: " + question);
 
-        String[] arr = new String[l];
-        for (int i = 0; i < l; i++) {
-            System.out.printf( "Строка %d: ", i + 1);
-            arr[i] = scanner.next();
+        for (int i = 1; i <= 3; i++) {
+            System.out.println( "Введи ответ: " );
+            String s = scanner.nextLine();
+            if (s.equals( "Подсказка" )) {
+                if (i == 1) {
+                    System.out.println( "Подсказка: Заархивированный ..." );
+                } else
+                    System.out.println( "Подсказка уже недоступна" );
+                System.out.println( "Введи ответ: " );
+                s = scanner.nextLine();
+                if (!s.equals( answer ) && i == 1)
+                    break;
+            }
+
+            if (s.equals( answer ))
+            {
+                System.out.println( "Правильно!" );
+                return;
+            }
+            else if (i < 3)
+                System.out.println( "Подумай еще!" );
         }
 
-        int max = 0;
-        int maxI = -1;
-        for (int i = 0; i < l; i++) {
-            String distinct = arr[i];
-            for (int j = 0; j < distinct.length(); j++) {
-                distinct = distinct.substring(0, j + 1) +
-                    distinct.substring( j + 1 ).replaceAll( distinct.substring( j, j + 1 ), "" );
-            }
-
-            if (distinct.length() > max) {
-                max = distinct.length();
-                maxI = i;
-            }
-            else if (max == distinct.length()) {
-                if (maxI == -1)
-                    maxI = i;
-            }
-        }
-
-        System.out.println("Ответ: " + arr[maxI]);
+        System.out.println( "Обидно, приходи в другой раз" );
     }
 }
