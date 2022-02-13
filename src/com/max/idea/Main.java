@@ -6,15 +6,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        final int X = 0, Y = 1, Z = 2;
 
-        System.out.print("Введите целое положительное число: ");
-        int x = scanner.nextInt();
+        System.out.print("Введите размер массива: ");
+        int l = scanner.nextInt();
+        double[] arr = new double[l];
 
-        int s = 0;
-        for (int i = 1; i <= x; i++) {
-            if (i % 2 != 0) s += i;
+        double s = 0;
+        for (int i = 0; i < l; i++) {
+            System.out.print("Введите элемент массива: ");
+            arr[i] = scanner.nextDouble();
+            s += arr[i];
         }
+        s = s / l;
 
-        System.out.printf("Сумма нечетных чисел равна: %d%n", s);
+        for (int i = 0; i < l; i++) {
+            System.out.println("Элемент * Среднее арифметическое равно: " + arr[i] * s);
+        }
     }
 }
