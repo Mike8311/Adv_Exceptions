@@ -1,32 +1,23 @@
 package com.max.idea;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner( System.in );
+        int[] arr = new int[15];
 
-        String latin = "qwertyuiopasdfghjklzxcvbnm";
-
-        System.out.print("Введите слова через пробел: ");
-        String str = scanner.nextLine();
-        String[] arr = str.split(" ");
-
-        int count = 0;
-        for (String s : arr) {
-            int j = 0;
-            String lowerWord = s.toLowerCase();
-            for (; j < s.length(); j++) {
-                if (!latin.contains( String.valueOf( s.charAt( j ) ).toLowerCase() )) break;
-            }
-            if (j == s.length()) {
-                System.out.println( s );
-                count++;
-            }
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = random.nextInt(40) - 20;
         }
 
-        System.out.println("Количество латинских слов: " + count);
+        int max = arr[0], min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            max = Math.max(max, arr[i]);
+            min = Math.min(min, arr[i]);
+        }
+
+        System.out.println("Максимальный и миниммальный элемент: " + max + " " + min);
+        System.out.println("Наибольший по модулю: " + Math.max(Math.abs(max), Math.abs(min)));
     }
 }
