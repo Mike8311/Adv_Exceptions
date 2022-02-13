@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        final int X = 0, Y = 1, Z = 2;
 
         System.out.print("Введите размер массива: ");
         int l = scanner.nextInt();
