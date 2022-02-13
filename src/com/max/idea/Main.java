@@ -1,17 +1,15 @@
 package com.max.idea;
 
+import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        String str = "I like Java!!!";
 
-        System.out.print("Введите первое число: ");
-        String s = scanner.next();
-        System.out.print("Введите второе число: ");
-        int i = scanner.nextInt();
-
-        System.out.println("Большее число: " + Math.max(Integer.parseInt(s), i));
-        System.out.println("Меньшее число: " + (double)Math.min(Integer.parseInt(s), i));
+        if (str.contains("Java") && str.startsWith("I like") && str.endsWith("!!!"))
+            System.out.println(str.toUpperCase());
+        System.out.println(str.replace('a', 'o').substring(7, 11));
     }
 }
