@@ -7,20 +7,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Введите размер массива: ");
-        int l = scanner.nextInt();
-        double[] arr = new double[l];
+        System.out.print("Введите количество строк матрицы: ");
+        int r = scanner.nextInt();
+        System.out.print("Введите количество столбцов матрицы: ");
+        int c = scanner.nextInt();
 
-        double s = 0;
-        for (int i = 0; i < l; i++) {
-            System.out.print("Введите элемент массива: ");
-            arr[i] = scanner.nextDouble();
-            s += arr[i];
+        int[][] mat = new int[r][c];
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                System.out.print("Введите элемент матрицы: ");
+                mat[i][j] = scanner.nextInt();
+            }
         }
-        s = s / l;
 
-        for (int i = 0; i < l; i++) {
-            System.out.println("Элемент * Среднее арифметическое равно: " + arr[i] * s);
+        for (int i = 0; i < c; i++) {
+            System.out.println("Элемент * 3 равно: " + mat[0][i] * 3);
         }
     }
 }
