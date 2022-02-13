@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner( System.in );
         String question = "Сидит дед, во сто шуб одет, кто его раздевает, тот слезы проливает";
         String answer = "Заархивированный вирус";
