@@ -1,20 +1,25 @@
 package com.max.idea;
 
+import com.max.idea.staff.Candy;
+import com.max.idea.staff.Jellybean;
+import com.max.idea.staff.Staff;
+
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner( System.in );
 
-        System.out.print( "Введите номер задания (1 - калькулятор, 2 - массив строк): " );
+        System.out.print( "Введите номер задания (1 - массив, 2 - сладкий подарок): " );
         int taskNum = scanner.nextInt();
 
         switch (taskNum) {
             case 1:
-                calculator( scanner );
+                intArray( scanner );
                 break;
             case 2:
-                stringArray( scanner );
+                sweetPresent();
                 break;
             default:
                 System.out.println( "Номер задания должен быть числом 1 или 2" );
@@ -24,109 +29,51 @@ public class Main {
     }
 
     /**
-     * Поиск самого длинного слоова в массиве
+     * Поиск максимального отрицательного и минимального положительного элемента массива
      *
      * @param scanner сканнер для чтения чисел
      */
-    private static void stringArray(Scanner scanner) {
-        System.out.print( "Введите размер массива слов: " );
-        String[] arr = new String[scanner.nextInt()];
-
-        int max = 0;
-        int j = -1;
+    private static void intArray(Scanner scanner) {
+        int[] arr = new int[20];
+        Random random = new Random();
+        int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+        int maxI = -1, minI = -1;
         for (int i = 0; i < arr.length; i++) {
-            System.out.printf( "Введите слово %d: ", i + 1 );
-            arr[i] = scanner.next();
-
-            if (arr[i].length() > max) {
-                max = arr[i].length();
-                j = i;
+            arr[i] = random.nextInt(20) - 10;
+            if (arr[i] < 0 && arr[i] > max) {
+                max = arr[i];
+                maxI = i;
+            }
+            if (arr[i] > 0 && arr[i] < min) {
+                min = arr[i];
+                minI = i;
             }
         }
 
-        System.out.print( "Самое длинное слово: " + arr[j] );
+        int temp = arr[maxI];
+        arr[maxI] = arr[minI];
+        arr[minI] = temp;
     }
 
     /**
-     * Калькулятор двух чисел
-     *
-     * @param scanner сканнер для чтения чисел
+     * Формирование сладкого подарка
      */
-    private static void calculator(Scanner scanner) {
-        System.out.print( "Введите дробное число: " );
-        double d1 = scanner.nextDouble();
+    private static void sweetPresent() {
+        Candy candy1 = new Candy( "Мишка на севере", 1.1, 3.5, 1 );
+        Candy candy2 = new Candy( "Меллер", 1.5, 0.5, 2 );
+        Jellybean jellybean1 = new Jellybean( "Fruittella", 2, 0.5, "Красный" );
+        Jellybean jellybean2 = new Jellybean( "Бон Пари", 2.5, 0.3, "Зеленый" );
 
-        System.out.print( "И еще одно: " );
-        double d2 = scanner.nextDouble();
-
-        System.out.print( "Введите операцию (+,-,/,*): " );
-        String op = scanner.next();
-
-        switch (op) {
-            // Сложение
-            case "+":
-                System.out.printf( "Сумма двух чисел: %.4f", sum( d1, d2 ) );
-                break;
-
-            // Вычитание
-            case "-":
-                System.out.printf( "Разница двух чисел: %.4f", sub( d1, d2 ) );
-                break;
-
-            // Деление
-            case "/":
-                System.out.printf( "Результат деления двух чисел: %.4f", div( d1, d2 ) );
-                break;
-
-            // Умножение
-            case "*":
-                System.out.printf( "Произведение двух чисел: %.4f", mul( d1, d2 ) );
-                break;
+        Staff[] box = { candy1, candy2, jellybean1, jellybean2 };
+        double sumWeigth = 0, sumPrice = 0;
+        System.out.println("Сладости в подарке: ");
+        for (Staff stuff : box) {
+            sumWeigth += stuff.getWeight();
+            sumPrice += stuff.getPrice();
+            System.out.println(stuff);
         }
-    }
-
-    /**
-     * Сложение двух дробных чисел
-     *
-     * @param d1 первое число
-     * @param d2 второне число
-     * @return сумма двух чисел
-     */
-    private static double sum(double d1, double d2) {
-        return d1 + d2;
-    }
-
-    /**
-     * Вычитание двух дробных чисел
-     *
-     * @param d1 первое число
-     * @param d2 второне число
-     * @return разница двух чисел
-     */
-    private static double sub(double d1, double d2) {
-        return d1 - d2;
-    }
-
-    /**
-     * Деление двух дробных чисел
-     *
-     * @param d1 первое число
-     * @param d2 второне число
-     * @return результат деления двух чисел
-     */
-    private static double div(double d1, double d2) {
-        return d1 / d2;
-    }
-
-    /**
-     * Умножение двух дробных чисел
-     *
-     * @param d1 первое число
-     * @param d2 второне число
-     * @return произведение двух чисел
-     */
-    private static double mul(double d1, double d2) {
-        return d1 * d2;
+        System.out.println("Oбщий вес подарка: " + sumWeigth);
+        System.out.println("Oбщая стоимость подарка: " + sumPrice);
     }
 }
 
