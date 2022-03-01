@@ -1,28 +1,70 @@
 package com.max.idea;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
+import com.max.idea.operations.*;
+
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner( new File( "Words.txt") );
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner( System.in );
 
-        Map<String, Integer> result = new WordCounter().Count( scanner );
-        int max = 0;
-        String maxWord = "";
-        for (Map.Entry<String, Integer> entry : result.entrySet()) {
-            String word = entry.getKey();
-            int count = entry.getValue();
-            System.out.printf( "Слово: %s Кол-во повторов: %d %n", word, count );
-            if (count > max) {
-                maxWord = word;
-                max = count;
-            }
-        }
-        System.out.printf( "Слово c макс кол-вом повторений: %s Кол-во повторов %d %n", maxWord, max );
+        calculator( scanner );
 
         scanner.close();
     }
-}
 
+    /**
+     * Калькулятор двух дробных чисел
+     *
+     * @param scanner сканнер для чтения чисел
+     */
+    private static void calculator(Scanner scanner) {
+        System.out.print( "Введите дробное число: " );
+        double d1 = scanner.nextDouble();
+
+        System.out.print( "И еще одно: " );
+        double d2 = scanner.nextDouble();
+
+        System.out.print( "Введите операцию калькулятора (+,-,/,*): " );
+        String op = scanner.next();
+
+        Operation operation;
+        switch (op) {
+            // Сложение
+            case "+":
+                operation = new Addition();
+                break;
+            // Вычитание
+            case "-":
+                operation = new Subtraction();
+                break;
+            // Деление
+            case "/":
+                operation = new Division();
+                break;
+            // Умножение
+            case "*":
+                operation = new Multiplication();
+                break;
+            default:
+                String message = String.format( "Операция неверно введена: %s %n", op );
+                System.out.println( message );
+                throw new InvalidInputOperation( message );
+        }
+
+        System.out.printf( "Выбрана %s %n", operation );
+        try {
+            // Операцию деления проводим отдельно с помощью целых чисел, чтобы получить исключение, а не Infinity
+            if (operation instanceof Division && d2 == 0) {
+                int res = (int) d1 / (int) d2;
+            }
+
+            System.out.printf( "Результат вычисления: %.4f %n", operation.Calculate( d1, d2 ) );
+        } catch (ArithmeticException e) {
+            if (operation instanceof Division) {
+                System.out.println( "Невозможно раздлелить на 0" );
+                throw e;
+            }
+        }
+    }
+}
