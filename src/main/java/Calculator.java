@@ -5,12 +5,13 @@ public class Calculator {
 
     /**
      * Выполнение операции
-     * @param d1 первое число
-     * @param d2 второе число
+     *
+     * @param d1        первое число
+     * @param d2        второе число
      * @param operation операция
      * @return результат
      */
-    public double calculate(double d1, double d2, String operation)  {
+    public double calculate(double d1, double d2, String operation) {
         switch (operation) {
             // Сложение
             case "+":
@@ -25,12 +26,13 @@ public class Calculator {
             case "*":
                 return multiplication( d1, d2 );
             default:
-                throw new InvalidOperationException(String.format( "Операция неверно введена: %s", operation ));
+                throw new InvalidOperationException( String.format( "Операция неверно введена: %s", operation ) );
         }
     }
 
     /**
      * Сложение двух дробных чисел
+     *
      * @param d1 первое число
      * @param d2 второе число
      * @return результ
@@ -41,26 +43,28 @@ public class Calculator {
 
     /**
      * Вычитание двух дробных чисел
+     *
      * @param d1 первое число
      * @param d2 второе число
      * @return результ
      */
-    private double subtraction(double d1, double d2) {
-        return d1 - d2;
-    }
+    private double subtraction(double d1, double d2) { return d1 - d2; }
 
     /**
      * Деленеие двух дробных чисел
+     *
      * @param d1 первое число
      * @param d2 второе число
      * @return результ
      */
     private double division(double d1, double d2) {
+        if (d2 == 0) throw new ArithmeticException( "Деление на 0!" );
         return d1 / d2;
     }
 
     /**
      * Умножение двух дробных чисел
+     *
      * @param d1 первое число
      * @param d2 второе число
      * @return результ
